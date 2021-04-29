@@ -28,7 +28,11 @@ app.use(passport.session())
 
 
 
-mongoose.connect("mongodb://localhost:27017/UserDB",{useNewUrlParser : true,useUnifiedTopology : true})
+mongoose.connect(process.env.MONGO_URL,{useNewUrlParser : true,useUnifiedTopology : true})
+.then(()=>{
+    console.log("Connected to Database")
+})
+.catch(err=>console.log(err))
 mongoose.set("useCreateIndex",true)
 
 const userSchema = new mongoose.Schema({
